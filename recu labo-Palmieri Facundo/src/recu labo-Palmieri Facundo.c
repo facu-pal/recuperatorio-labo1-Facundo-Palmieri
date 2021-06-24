@@ -13,6 +13,8 @@
 #include "utn.h"
 #include "trabajo.h"
 #include "servicio.h"
+#include "informes.h"
+
 
 
 int main(void) {
@@ -21,6 +23,7 @@ int main(void) {
 	int cantTrabajo=0;
 	int auxContadorId = 0;
 	int idEmpledoBuscar;
+	int subMenu;
 	eTrabajo trabajo[LEN_STRUCT_TRABAJO];
 	eServicio servicios[LEN_STRUCT_SERVICIO]={{20000,"limpieza",250,1},{20001,"parche",300,1},{20002,"centrado",400,1},{20003,"cadena",350,1}};
 
@@ -36,7 +39,8 @@ int main(void) {
 					"4. Listar trabajo\n"
 					"5. Listar servicios\n"
 					"6. Total\n"
-					"7. Salir\n"
+					"7. Informes \n"
+					"8. Salir\n"
 					"Selecionar opcion: ","Error. Menu:\n"
 					"1. Alta de trabajo.\n"
 					"2. Modificar trabajo.\n"
@@ -44,8 +48,9 @@ int main(void) {
 					"4. Listar trabajo\n"
 					"5. Listar servicios\n"
 					"6. Total\n"
-					"7. Salir\n"
-					"Selecionar opcion(del 1 al 7): ", 1, 7, 3) == 0) {
+					"7. Informes \n"
+					"8. Salir\n"
+					"Selecionar opcion(del 1 al 8): ", 1, 8, 3) == 0) {
 				switch (option) {
 				case 1:
 					if (altaTrabajo(trabajo, LEN_STRUCT_TRABAJO, &auxContadorId) == 0) {
@@ -109,14 +114,45 @@ int main(void) {
 					printf("\n \n ");
 
 					break;
-				case 7:
+			case 7:
+				if (cantTrabajo > 0) {
+					do {
+						if (utn_getInt(&subMenu, " Sub menu informes:\n"
+								"1. Alta de trabajo.\n"
+								"2. Modificar trabajo.\n"
+								"3. Salir\n", "Error. Sub menu informes:\n"
+								"1. Alta de trabajo.\n"
+								"2. Modificar trabajo.\n"
+								"3. Salir\n"
+								"subMenu opcion(del 1 al 8): ", 1, 3, 3) == 0) {
+							switch (subMenu) {
+							case 1:
+								informesA(trabajo, LEN_STRUCT_TRABAJO);
+								break;
+
+							case 2:
+								informesB(trabajo, LEN_STRUCT_TRABAJO);
+
+								break;
+							case 3:
+								printf("Salio del sub menu de informes");
+								break;
+
+							}
+						}
+
+					} while (subMenu != 3);
+				}
+
+				break;
+				case 8:
 					printf("\n Gracias por la aplicacion \n ");
 
 					break;
 
 				}
 			}
-		} while (option != 7);
+		} while (option != 8);
 
 
 
