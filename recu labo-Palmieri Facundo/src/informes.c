@@ -16,14 +16,14 @@ int informesA(eTrabajo *aArray,int tamanio){
 			aux[i]= aArray[i];
 		}//fin del for
 
-		for (int i = 0; i < tamanio-1; i++) {
+		for (int i = 0; i < tamanio - 1; i++) {
 			for (int j = i + 1; i < tamanio; j++) {
-
-				if (strcmp(aux[i].marcaBiclieta,aux[j].marcaBiclieta)>0) {
-					auxBurbujeo = aux[i];
-					aux[i] = aux[j];
-					aux[i] = auxBurbujeo ;
-
+				if (aux[i].isEmpty == 1 && aux[j].isEmpty == 1) {
+					if (strcmp(aux[i].marcaBiclieta, aux[j].marcaBiclieta)> 0) {
+						auxBurbujeo = aux[i];
+						aux[i] = aux[j];
+						aux[i] = auxBurbujeo;
+					}
 				}
 			}
 		}
