@@ -37,7 +37,7 @@ int main(void) {
 					"5. Listar servicios\n"
 					"6. Total\n"
 					"7. Salir\n"
-					"Selecionar opcion :","Error. Menu:\n"
+					"Selecionar opcion: ","Error. Menu:\n"
 					"1. Alta de trabajo.\n"
 					"2. Modificar trabajo.\n"
 					"3. Baja de trabajo\n"
@@ -45,7 +45,7 @@ int main(void) {
 					"5. Listar servicios\n"
 					"6. Total\n"
 					"7. Salir\n"
-					"Selecionar opcion(del 1 al 7):", 1, 7, 3) == 0) {
+					"Selecionar opcion(del 1 al 7): ", 1, 7, 3) == 0) {
 				switch (option) {
 				case 1:
 					if (altaTrabajo(trabajo, LEN_STRUCT_TRABAJO, &auxContadorId) == 0) {
@@ -88,8 +88,11 @@ int main(void) {
 					printf("\n \n ");
 					if (cantTrabajo > 0) {
 					printsTrabajos(trabajo,LEN_STRUCT_TRABAJO);
+					}else {
+						printf("Error.No hay empleados, porfavor ingrese empleado(opcion 1)");
 					}
 					printf("\n \n ");
+
 					break;
 				case 5:
 					printf("\n \n ");
@@ -100,14 +103,14 @@ int main(void) {
 					break;
 				case 6:
 					printf("\n \n ");
-
+					if (cantTrabajo > 0) {
+					totalServicio(trabajo, LEN_STRUCT_TRABAJO, servicios, LEN_STRUCT_SERVICIO);
+					}
 					printf("\n \n ");
 
 					break;
 				case 7:
-					printf("\n \n ");
-
-					printf("\n \n ");
+					printf("\n Gracias por la aplicacion \n ");
 
 					break;
 

@@ -21,6 +21,6 @@ void printServicio(eServicio aArray);
 
 int printsServicios(eServicio aArray[], int len);
 
-
+int buscarPrecio(int idServicio, eServicio *aArray, int tamanio);
 
 #endif /* SERVICIO_H_ */

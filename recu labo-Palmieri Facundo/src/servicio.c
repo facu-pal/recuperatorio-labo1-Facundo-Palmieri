@@ -7,7 +7,7 @@
 
 void printServicio(eServicio aArray) {
 
-		printf("\n %5d  %10s %10f ", aArray.idServicio,aArray.descripcion,aArray.precio);
+		printf("\n %-5d  %-10s %10.2f ", aArray.idServicio,aArray.descripcion,aArray.precio);
 
 }
 
@@ -18,7 +18,7 @@ int printsServicios(eServicio aArray[], int len) {
 
 	//CABECERA
 	printf("\n LISTADO servico\n");
-	printf("%-5s  %-20s %-10s  ", "Id", "Descripcion", "precio");
+	printf("%-5s  %-10s %10s  ", " Id", "Descripcion", "precio");
 	if (aArray != NULL && len > 0) {
 		for (i = 0; i < len; i++) {
 			if (aArray[i].isEmpty == 0) {
@@ -30,5 +30,20 @@ int printsServicios(eServicio aArray[], int len) {
 		}
 	}
 	return retorno;
+}
+
+int buscarPrecio(int idServicio, eServicio *aArray,int tamanio){
+	int returno = -1;
+
+	if(aArray != NULL){
+		for(int i=0;i<tamanio;i++){
+			if(idServicio ==aArray[i].idServicio ){
+				returno = aArray[i].precio;
+				break;
+			}
+		}
+	}
+
+	return returno;
 }
 

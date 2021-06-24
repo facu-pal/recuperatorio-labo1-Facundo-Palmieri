@@ -4,6 +4,8 @@
 #include <string.h>
 #include "utn.h"
 #include "trabajo.h"
+#include "servicio.h"
+
 
 int initTabajo(eTrabajo *list, int len) {
 	int i;
@@ -38,22 +40,22 @@ int buscaLibre(eTrabajo pArray[], int len) {
 
 void printTrabajo(eTrabajo aArray) {
 	switch (aArray.idServicio) {
-	case 1:
+	case 20000:
 		printf("\n %d  %10s %5d %10s %5d/%d/%d ", aArray.idTrabajo,
 				aArray.marcaBiclieta, aArray.rodadoBicicleta, "limpieza",
 				aArray.fecha.dia, aArray.fecha.mes, aArray.fecha.anio);
 		break;
-	case 2:
+	case 20001:
 		printf("\n %d  %10s %5d %10s %5d/%d/%d ", aArray.idTrabajo,
 				aArray.marcaBiclieta, aArray.rodadoBicicleta, "parche",
 				aArray.fecha.dia, aArray.fecha.mes, aArray.fecha.anio);
 		break;
-	case 3:
+	case 20002:
 		printf("\n %d  %10s %5d %10s %5d/%d/%d ", aArray.idTrabajo,
 				aArray.marcaBiclieta, aArray.rodadoBicicleta, "centrado",
 				aArray.fecha.dia, aArray.fecha.mes, aArray.fecha.anio);
 		break;
-	case 4:
+	case 20003:
 		printf("\n %d  %10s %5d %10s %5d/%d/%d ", aArray.idTrabajo,
 				aArray.marcaBiclieta, aArray.rodadoBicicleta, "cadena",
 				aArray.fecha.dia, aArray.fecha.mes, aArray.fecha.anio);
@@ -68,7 +70,7 @@ int printsTrabajos(eTrabajo aArray[], int len) {
 
 	//CABECERA
 	printf("\n LISTADO trabajo\n");
-	printf("%-5s  %-20s %-20s %-20s %-20s ", "Id", "Marca bicileta", "Rodado bicileta ", "Servicio", "Fechas");
+	printf("%-5s  %-10s %-10s %-10s %-10s ", "Id", "Marca bicileta", "Rodado bicileta ", "Servicio", "Fechas");
 	if (aArray != NULL && len > 0) {
 		for (i = 0; i < len; i++) {
 			if (aArray[i].isEmpty == 0) {
@@ -94,7 +96,7 @@ int altaTrabajo(eTrabajo aArray[], int cantidadDeArray, int* contadorId){
 			}else{
 				if((utn_getString(auxTrabajo.marcaBiclieta, "Ingrese la marca de bicileta:","Error.Ingrese la marca de bicicleta:", 2) == 0)
 				&& (utn_getInt(&auxTrabajo.rodadoBicicleta,"Ingrese el rodado de la bicicleta(del 1 al 100):",	"Error.Ingrese el rodado de la bicicleta(del 1 al 100):", 1, 100, 2) == 0)
-				&&(utn_getInt(&auxTrabajo.idServicio,"Ingrese el servicio(del 1 al 4):",	"Error.Ingrese el servicio(del 1 al 4):", 1, 4, 2) == 0)
+				&&(utn_getInt(&auxTrabajo.idServicio,"Ingrese el servicio(del 20000 al 20003):","Error.Ingrese el servicio(del 1 al 20003):", 20000, 20003, 2) == 0)
 				&&(utn_getInt(&auxTrabajo.fecha.dia,"Ingrese el dia(del 1 al 31):",	"Error.Ingrese el dia(del 1 al 31):", 1, 31, 2) == 0)
 				&&(utn_getInt(&auxTrabajo.fecha.mes,"Ingrese el mes(del 1 al 12):",	"Error.Ingrese el mes(del 1 al 12):", 1, 31, 2) == 0)
 				&&(utn_getInt(&auxTrabajo.fecha.anio,"Ingrese el año:",	"Error.Ingrese el servicio(del 2018 al 2040):", 2018, 2040, 2) == 0)){
@@ -152,7 +154,7 @@ int modificaEmployee(eTrabajo aArray[], int posicion) {
 		scanf("%d", &respuesta);
 
 		while (respuesta > 2 || respuesta < 1) {
-			printf(	"\nError. no ingreso una opcion correcta (opciones del 1 al 4)");
+			printf(	"\nError. no ingreso una opcion correcta (opciones del 1 al 2)");
 			printf("¿Que desea modificar?\n");
 			printf("1_la marca \n");
 			printf("2_el servicio\n");
@@ -169,7 +171,7 @@ int modificaEmployee(eTrabajo aArray[], int posicion) {
 			}
 			break;
 		case 2:
-			utn_getInt(&auxTrabajo.idServicio,"Ingrese el nuevo servicio(del 1 al 4):",	"Error.Ingrese el nuevo servicio(del 1 al 4):", 1, 4, 2);
+			utn_getInt(&auxTrabajo.idServicio,"Ingrese el nuevo servicio(del 20000 al 20003):",	"Error.Ingrese el nuevo servicio(del 20000 al 20003):", 20000, 20003, 2);
 
 			if (utn_getConfirm() == 0) {
 				aArray[posicion].idServicio= auxTrabajo.idServicio;
@@ -197,7 +199,57 @@ int eliminarTrabajo(eTrabajo *aArray, int posicion) {
 	return retorno;
 }
 
+int totalServicio(eTrabajo *aArrayTrabajo, int tamanioTrabajo, eServicio *aArrayServicio, int tamanioServicio){
+	int retorno =-1;
+	int totalServicio=0;
+	int servicio1=0;
+	int servicio2=0;
+	int servicio3=0;
+	int servicio4=0;
 
+	if (aArrayTrabajo != NULL && tamanioTrabajo > 0 && aArrayServicio != NULL
+			&& tamanioServicio > 0) {
+
+		for (int i = 0; i < tamanioTrabajo; i++) {
+			if (aArrayTrabajo[i].isEmpty == 1) {
+				totalServicio += buscarPrecio(aArrayTrabajo[i].idServicio,	aArrayServicio, tamanioServicio);
+				switch (aArrayTrabajo[i].idServicio) {
+				case 20000:
+					servicio1 += buscarPrecio(aArrayTrabajo[i].idServicio,	aArrayServicio, tamanioServicio);
+					break;
+				case 20001:
+					servicio2 += buscarPrecio(aArrayTrabajo[i].idServicio,	aArrayServicio, tamanioServicio);
+					break;
+				case 20002:
+					servicio3 += buscarPrecio(aArrayTrabajo[i].idServicio,	aArrayServicio, tamanioServicio);
+					break;
+				case 20003:
+					servicio4 += buscarPrecio(aArrayTrabajo[i].idServicio,	aArrayServicio, tamanioServicio);
+
+					break;
+				}
+			}
+		}
+		retorno = 0;
+
+	}
+
+	printf("La suma de todos los trabajos de todos los servicios es:$%d \n",totalServicio);
+	if (servicio1 != 0) {
+		printf("La suma de todos los trabajos del servicio limpieza es:$%d \n",servicio1);
+	}
+	if (servicio2 != 0) {
+		printf("La suma de todos los trabajos del servicio parche es:$%d \n",servicio2);
+	}
+	if (servicio3 != 0) {
+		printf("La suma de todos los trabajos del servicio centrado es:$%d \n",servicio3);
+	}
+	if (servicio4 != 0) {
+		printf("La suma de todos los trabajos del servicio cadena es:$%d \n",servicio4);
+	}
+
+	return retorno;
+}
 
 
 

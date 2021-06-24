@@ -8,6 +8,8 @@
 #ifndef TRABAJO_H_
 #define TRABAJO_H_
 #define LEN_STRUCT_TRABAJO 100
+#include "servicio.h"
+
 
 typedef struct{
 	int dia;
@@ -69,6 +71,8 @@ int modificaEmployee(eTrabajo aArray[], int posicion);
 * \param posicion int pasa la posicion que se quiere dar de baja
 * \return int Return (-1) if Error [Invalid length or NULL pointer or if can't find a employee] - (0) if Ok*/
 int eliminarTrabajo(eTrabajo *aArray, int posicion);
+
+int totalServicio(eTrabajo *aArrayTrabajo, int tamanioTrabajo, eServicio *aArrayServicio, int tamanioServicio);
 
 
 #endif /* TRABAJO_H_ */
