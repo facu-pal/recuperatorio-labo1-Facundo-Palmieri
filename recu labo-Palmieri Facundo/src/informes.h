@@ -11,9 +11,9 @@
 #include "trabajo.h"
 #include "servicio.h"
 
-int informesA(eTrabajo *aArray,int tamanio);
+int informesA(eTrabajo *aArrayTrabajo,int tamanioTrabajo);
 
-int informesB(eTrabajo *aArray,int tamanio);
+int informesB(eTrabajo *aArrayTrabajo,int tamanioTrabajo, eServicio *aArrayServicio, int tamanioServicio);
 
 
 #endif /* INFORMES_H_ */

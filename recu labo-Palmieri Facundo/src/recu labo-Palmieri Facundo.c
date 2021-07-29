@@ -118,11 +118,11 @@ int main(void) {
 				if (cantTrabajo > 0) {
 					do {
 						if (utn_getInt(&subMenu, " Sub menu informes:\n"
-								"1. Alta de trabajo.\n"
-								"2. Modificar trabajo.\n"
+								"1. Informe 1.\n"
+								"2. Informe 2.\n"
 								"3. Salir\n", "Error. Sub menu informes:\n"
-								"1. Alta de trabajo.\n"
-								"2. Modificar trabajo.\n"
+								"1. Informe 1.\n"
+								"2. Informe 2.\n"
 								"3. Salir\n"
 								"subMenu opcion(del 1 al 8): ", 1, 3, 3) == 0) {
 							switch (subMenu) {
@@ -131,11 +131,11 @@ int main(void) {
 								break;
 
 							case 2:
-								informesB(trabajo, LEN_STRUCT_TRABAJO);
+								informesB(trabajo, LEN_STRUCT_TRABAJO,servicios,LEN_STRUCT_SERVICIO);
 
 								break;
 							case 3:
-								printf("Salio del sub menu de informes");
+								printf("Salio del sub menu de informes\n");
 								break;
 
 							}

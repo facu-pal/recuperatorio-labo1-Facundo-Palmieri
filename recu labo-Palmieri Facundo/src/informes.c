@@ -4,22 +4,23 @@
 #include <string.h>
 #include "utn.h"
 #include "informes.h"
+#include "trabajo.h"
 
 
-int informesA(eTrabajo *aArray,int tamanio){
+int informesA(eTrabajo *aArrayTrabajo,int tamanioTrabajo){
 	int retorno = -1;
-	eTrabajo aux[tamanio];
+	eTrabajo aux[tamanioTrabajo];
 	eTrabajo auxBurbujeo;
-	if(aArray!= NULL && tamanio > 0){
+	if(aArrayTrabajo!= NULL && tamanioTrabajo > 0){
 
-		for(int i=0;i< tamanio;i++){
-			aux[i]= aArray[i];
+		for(int i=0;i< tamanioTrabajo;i++){
+			aux[i]= aArrayTrabajo[i];
 		}//fin del for
 
-		for (int i = 0; i < tamanio - 1; i++) {
-			for (int j = i + 1; i < tamanio; j++) {
+		for (int i = 0; i < tamanioTrabajo - 1; i++) {
+			for (int j = i + 1; i < tamanioTrabajo; j++) {
 				if (aux[i].isEmpty == 1 && aux[j].isEmpty == 1) {
-					if (strcmp(aux[i].marcaBiclieta, aux[j].marcaBiclieta)> 0) {
+					if (strcmp(aux[i].marcaBiclieta, aux[j].marcaBiclieta)>0) {
 						auxBurbujeo = aux[i];
 						aux[i] = aux[j];
 						aux[i] = auxBurbujeo;
@@ -31,53 +32,34 @@ int informesA(eTrabajo *aArray,int tamanio){
 
 	}//fin del if
 
-	printsTrabajos(aux,tamanio);
+	printsTrabajos(aux,tamanioTrabajo);
 	return retorno;
 }
 
-int informesB(eTrabajo *aArray,int tamanio){
+int informesB(eTrabajo *aArrayTrabajo,int tamanioTrabajo, eServicio *aArrayServicio, int tamanioServicio){//paso los 2 array y su cantidad de elementos
 	int retorno =-1;
-	int servicio1=0;
-	int servicio2=0;
-	int servicio3=0;
-	int servicio4=0;
+	int max=0;
+	int idMaxSer;
+	int cant=0;
 
-	if (aArray != NULL && tamanio) {
-
-		for (int i = 0; i < tamanio; i++) {
-			if(aArray[i].isEmpty == 1){
-				switch (aArray[i].idServicio) {
-				case 20000:
-					servicio1++;
-					break;
-				case 20001:
-					servicio2++;
-					break;
-				case 20002:
-					servicio3++;
-					break;
-				case 20003:
-					servicio4++;
-					break;
+	if (aArrayTrabajo != NULL && tamanioTrabajo > 0 && aArrayServicio != NULL	&& tamanioServicio > 0) {
+		for (int i = 0; tamanioServicio > i; i++) {
+			for (int j = 0; tamanioTrabajo > j; j++) {
+				if (aArrayTrabajo[i].isEmpty == 1) {
+					if (aArrayTrabajo[j].idServicio	== aArrayServicio[i].idServicio) {
+						cant++;
+					}
 				}
 			}
+			if ((cant > max) || max == 0) {
+				max = cant;
+				idMaxSer = aArrayServicio[i].idServicio;
+			}
+			cant=0;
 		}
-		retorno = 0;
-	}
-
-	if(servicio1 > servicio2 && servicio1 > servicio3 &&servicio1 > servicio4){
-		printf("El servicio con mas trabajo es limpieza con:%d trabajos realizados\n",servicio1);
-
-	}else if(servicio2 > servicio1 && servicio2 > servicio3 && servicio2 > servicio4) {
-		printf("El servicio con mas trabajo es parche con:%d trabajos realizados\n",servicio2);
-
-	}else if(servicio3 > servicio1 && servicio3 > servicio2 && servicio3 > servicio4){
-		printf("El servicio con mas trabajo es centrado con:%d trabajos realizados\n",servicio3);
-
-	}else if(servicio4 > servicio1 && servicio4 > servicio2 && servicio4 > servicio3){
-		printf("El servicio con mas trabajo es cadena con:%d trabajos realizados\n",servicio4);
 
 	}
+	printf("El servicio con mas trabajo es el id de servicio:%d con:%d trabajos realizados\n",idMaxSer,max);
 
 
 	return retorno;
